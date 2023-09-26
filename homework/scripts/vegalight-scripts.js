@@ -24,11 +24,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 "mark": {
                     "type": "geoshape",
                     "stroke": "black",
-                    "strokeWidth": 1
+                    "fill": "white",
+                    "strokeWidth": .2
                 },
                 "encoding": {
-                    "color": {"value": "lightgray"}
-                }
+                    "color": {
+                        "field": "priceCategory",
+                        "type": "nominal",
+                        "legend": {"title": "Data Availability"},
+                        "scale": {
+                            "domain": ["No Data from Source"],
+                            "range": ["white"]
+                        }
+                    }
+                },
+                "tooltip": [
+                    {"field": "properties.Suburb", "type": "nominal", "title": "Suburb"},
+                    {"field": "properties.Suburb", "type": "nominal", "title": "Suburb"}
+                ]
             },
             {
                 "mark": "geoshape",

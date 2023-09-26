@@ -10,8 +10,8 @@
         <script src="./dataset/australiaTopology.js"></script>
         <script src="./dataset/melbourne_topology.js"></script>
         <script src="./dataset/topology.js"></script>
-        <!-- <script src="./dataset/dataset.js"></script> -->
-        <script src="./dataset/avgDataset.js"></script>
+        <!-- <script src="./dataset/avgDataset.js"></script> -->
+        <script src="./dataset/dataset.js"></script>
         <script src="./dataset/vic_suburbs.js"></script>
         <script src="./scripts/vegalight-scripts.js"></script>
 
@@ -19,12 +19,23 @@
          .vega-actions a {
              margin-right: 5px;
          }
+
+         #vis-topology {
+             border: 1px solid black;
+         }
+
+         #vis-topology__container {
+             width: 100vw;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+         }
         </style>
     </head>
     <body>
-        <h1>Template for Embedding Vega-Lite Visualization</h1>
-        <div id="vis"></div>
-        <!-- <hr /> -->
-        <div id="vis-topology"></div>
+        <h1>Average House Prices Per Number of Rooms of Melbourne Suburbs between 2016 and 2017</h1>
+        <div id="vis-topology__container">
+            <div id="vis-topology"></div>
+        </div>
     </body>
 </html>
