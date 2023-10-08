@@ -1,30 +1,52 @@
 // https://mapshaper.org/
 
 document.addEventListener("DOMContentLoaded", function () {
-    const populationEachYear = {
-        "2000": 2386323.75,
-        "2001": 2418180.25,
-        "2002": 2450759.25,
-        "2003": 2471493.0,
-        "2004": 2483497.25,
-        "2005": 2498053.75,
-        "2006": 2518999.75,
-        "2007": 2540229.0,
-        "2008": 2564122.5,
-        "2009": 2592065.5,
-        "2010": 2622646.75,
-        "2011": 2656077.75,
-        "2012": 2689072.5,
-        "2013": 2724070.75,
-        "2014": 2760322.5,
-        "2015": 2801489.75,
-        "2016": 2841827.0,
-        "2017": 2885132.5,
-        "2018": 2934241.75,
-        "2019": 2978786.5,
-        "2020": 3022373.5,
-        "2021": 3059311.0,
-        "2022": 3097810.5
+    // console.log(rentBySuburbYear);
+
+    let uniqueSuburbs = [...new Set(rentBySuburbYear.map(item => item.Suburb))];
+
+    uniqueSuburbs.sort((a, b) => a.localeCompare(b));
+
+    var rentBySuburbYearLineChart = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "width": 900,
+        "height": 450,
+        "title": "Average Price of Rent per Room vs Year by Suburb",
+        "data": {
+            "values": rentBySuburbYear
+        },
+        "selection": {
+            "Select": {
+                "type": "single",
+                "fields": ["Suburb"],
+                "init": { "Suburb": "Armadale" },
+                "bind": {
+                    "input": "select",
+                    "options": uniqueSuburbs
+                }
+            }
+        },
+        "transform": [{
+            "filter": { "selection": "Select" }
+        }],
+        "mark": { "type": "line", "point": { filled: true, size: 100 } },
+        "encoding": {
+            "x": {
+                "field": "Year",
+                "type": "Ordinal",
+                // "axis": { "format": "%Y" }
+            },
+            "y": {
+                "field": "Price",
+                "type": "quantitative",
+                "title": "Rent Price"
+            },
+            "tooltip": [
+                { "field": "Year", "type": "ordinal", "title": "Year" },
+                { "field": "Price", "type": "quantitative", "title": "Rent Price" }
+            ]
+        }
     };
 
+    vegaEmbed('#rent-by-suburb-year-line-chart', rentBySuburbYearLineChart);
 });
